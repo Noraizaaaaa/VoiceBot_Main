@@ -1,0 +1,719 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-deep: #000000;
+    --bg-gradient: radial-gradient(circle at top right, #1a0b2e 0%, #000000 70%);
+    --accent-purple: #9d50bb;
+    --accent-blue: #6e48aa;
+    --accent-yellow: #fdd819;
+    --accent-pink: #e94057;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --glass-header: rgba(10, 10, 15, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --toggle-active-bg: #1d6ef5;
+    --toggle-inactive-bg: rgba(255, 255, 255, 0.07);
+    --toggle-container-bg: rgba(15, 15, 20, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-deep);
+    background-image: var(--bg-gradient);
+    color: var(--text-primary);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    max-width: 860px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+/* ──────────────────────────────────────────────────────
+   Bottom Footer Controls
+────────────────────────────────────────────────────── */
+.footer-controls {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.glass-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: auto;
+}
+
+.status-pill {
+    background: rgba(20, 20, 20, 0.85);
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 160px;
+    text-align: center;
+    white-space: nowrap;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .status-pill {
+        min-width: 180px;
+        font-size: 0.8rem;
+    }
+    .footer-controls {
+        bottom: 40px;
+    }
+}
+
+/* ──────────────────────────────────────────────────────
+   Mode Toggle (Heygen-style pill)
+────────────────────────────────────────────────────── */
+.mode-toggle-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0 4px 0;
+    flex-wrap: wrap;
+}
+
+/* ──────────────────────────────────────────────────────
+   Language Selector — matches mode-toggle height exactly
+────────────────────────────────────────────────────── */
+.lang-selector-wrapper {
+    position: relative;          /* anchor for absolute select overlay */
+    display: inline-flex;
+    align-items: center;
+    align-self: stretch;         /* stretches to same height as mode-toggle sibling */
+    gap: 7px;
+    background: var(--toggle-container-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0 14px;             /* no top/bottom padding — align-self:stretch handles height */
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.lang-selector-wrapper:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Focus ring — shown when the hidden select is focused via keyboard */
+.lang-selector-wrapper:focus-within {
+    border-color: rgba(29, 110, 245, 0.6);
+    box-shadow: 0 0 0 3px rgba(29, 110, 245, 0.15), 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Globe icon */
+.lang-globe-icon {
+    width: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.lang-selector-wrapper:hover .lang-globe-icon {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Visible language name */
+.lang-display-text {
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    pointer-events: none;
+    min-width: 48px;
+    transition: color 0.2s ease;
+}
+
+.lang-selector-wrapper:hover .lang-display-text {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Chevron — rotates slightly on hover */
+.lang-chevron {
+    width: 8px;
+    height: 5px;
+    color: rgba(255, 255, 255, 0.35);
+    flex-shrink: 0;
+    pointer-events: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.lang-selector-wrapper:hover .lang-chevron {
+    color: rgba(255, 255, 255, 0.6);
+    transform: translateY(1px);
+}
+
+/* Invisible full-area select overlay — clicking anywhere on the pill opens it */
+.lang-select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+}
+
+/* Native option styling */
+.lang-select option {
+    background: #1a1a2e;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    padding: 6px;
+}
+
+
+.mode-toggle {
+    display: inline-flex;
+    background: var(--toggle-container-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 4px;
+    gap: 4px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.mode-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 9px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.55);
+    background: transparent;
+    transition: background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+.mode-btn svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: opacity 0.22s ease;
+}
+
+.mode-btn.active {
+    background: var(--toggle-active-bg);
+    color: #ffffff;
+    box-shadow: 0 2px 12px rgba(29, 110, 245, 0.45);
+}
+
+.mode-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ──────────────────────────────────────────────────────
+   Main Layout
+────────────────────────────────────────────────────── */
+.main-content.siri-layout {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 28px 20px;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+/* ──────────────────────────────────────────────────────
+   Transcript / Chat History Section
+────────────────────────────────────────────────────── */
+.transcript-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+    overflow-y: auto;
+    max-height: 62vh;
+    margin-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.transcript-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.transcript-section::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.transcript-section::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.chat-history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.active-chunk-text {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.5;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 90%;
+    margin: auto;
+    align-self: center;
+}
+
+.muted-text {
+    color: var(--text-muted);
+}
+
+/* ──────────────────────────────────────────────────────
+   Voice Section (Audio mode)
+────────────────────────────────────────────────────── */
+.voice-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 70px;
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+.iridescent-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+.voice-agent-trigger {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orb-iridescent {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%,
+            #ffffff 0%,
+            #fdd819 20%,
+            #e94057 50%,
+            #6e48aa 80%,
+            #9d50bb 100%);
+    box-shadow:
+        0 0 40px rgba(233, 64, 87, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* orb-rings hidden per user request */
+.orb-rings {
+    display: none;
+}
+
+.mic-overlay {
+    position: relative;
+    z-index: 5;
+    color: white;
+}
+
+.mic-overlay svg {
+    width: 44px;
+    height: 44px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.voice-agent-trigger.recording .mic-overlay svg {
+    color: var(--accent-yellow);
+    filter: drop-shadow(0 0 10px rgba(253, 216, 25, 0.8));
+    transform: scale(1.1);
+}
+
+/* Wave Visualizer hidden per user request */
+.voice-visualizer,
+.wave-container,
+.wave-bar {
+    display: none !important;
+}
+
+/* ──────────────────────────────────────────────────────
+   Text Section (Text mode)
+────────────────────────────────────────────────────── */
+.text-section {
+    padding-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: opacity 0.3s ease;
+}
+
+.text-input-area {
+    width: 100%;
+}
+
+.siri-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 4px 4px 4px 16px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.siri-input-container:focus-within {
+    border-color: rgba(29, 110, 245, 0.7);
+    box-shadow: 0 0 0 3px rgba(29, 110, 245, 0.15);
+}
+
+#textInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+}
+
+#textInput::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+}
+
+.send-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--toggle-active-bg);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+    color: white;
+}
+
+.send-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.send-btn:hover {
+    background: #1558cc;
+    transform: scale(1.05);
+}
+
+.send-btn:active {
+    transform: scale(0.97);
+}
+
+.send-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Legacy chat controls hidden */
+.chat-controls {
+    display: none;
+}
+
+/* ──────────────────────────────────────────────────────
+   Chat Bubbles
+────────────────────────────────────────────────────── */
+.final-transcript {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.final-transcript .muted-text {
+    display: none;
+}
+
+.chat-message-bubble {
+    max-width: 78%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    color: white;
+    font-size: 0.97rem;
+    line-height: 1.55;
+    position: relative;
+    word-wrap: break-word;
+    animation: fadeIn 0.25s ease-out;
+}
+
+/* User Bubble (Right) */
+.user-bubble,
+.final-user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #6e48aa, #9d50bb);
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 15px rgba(157, 80, 187, 0.3);
+    max-width: 68%;
+}
+
+/* Agent Bubble (Left) */
+.agent-bubble,
+.final-agent {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom-left-radius: 4px;
+    backdrop-filter: blur(10px);
+}
+
+/* ──────────────────────────────────────────────────────
+   Markdown Formatting inside Bubbles
+────────────────────────────────────────────────────── */
+.chat-message-bubble p {
+    margin: 0 0 6px 0;
+}
+.chat-message-bubble p:last-child {
+    margin-bottom: 0;
+}
+
+.chat-message-bubble strong,
+.chat-message-bubble b {
+    font-weight: 700;
+}
+
+.chat-message-bubble em,
+.chat-message-bubble i {
+    font-style: italic;
+}
+
+.chat-message-bubble ul,
+.chat-message-bubble ol {
+    margin: 6px 0 4px 0;
+    padding-left: 20px;
+}
+
+.chat-message-bubble ul {
+    list-style: disc;
+}
+
+.chat-message-bubble ol {
+    list-style: decimal;
+}
+
+.chat-message-bubble li {
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+
+.chat-message-bubble li:last-child {
+    margin-bottom: 0;
+}
+
+.chat-message-bubble h1,
+.chat-message-bubble h2,
+.chat-message-bubble h3 {
+    font-weight: 600;
+    margin: 8px 0 4px;
+    line-height: 1.3;
+}
+
+.chat-message-bubble h1 { font-size: 1.15em; }
+.chat-message-bubble h2 { font-size: 1.08em; }
+.chat-message-bubble h3 { font-size: 1.0em; }
+
+/* ──────────────────────────────────────────────────────
+   Typing Indicator
+────────────────────────────────────────────────────── */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 16px;
+    align-self: flex-start;
+}
+
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+/* ──────────────────────────────────────────────────────
+   Close / Interrupt Button
+────────────────────────────────────────────────────── */
+.floating-close-btn {
+    width: 44px;
+    height: 44px;
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+}
+
+.floating-close-btn.visible {
+    display: flex;
+}
+
+/* ──────────────────────────────────────────────────────
+   Interaction States
+────────────────────────────────────────────────────── */
+.voice-agent-trigger.recording .orb-iridescent {
+    transform: scale(1.1);
+    box-shadow: 0 0 50px rgba(253, 216, 25, 0.4);
+    animation: orb-spin 2s linear infinite;
+}
+
+@keyframes orb-spin {
+    from { filter: hue-rotate(0deg); }
+    to   { filter: hue-rotate(360deg); }
+}
+
+.voice-agent-trigger.speaking .orb-iridescent {
+    animation: orb-pulse-vocal 0.5s ease-in-out infinite;
+}
+
+@keyframes orb-pulse-vocal {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.05); }
+}
+
+/* ──────────────────────────────────────────────────────
+   Animations
+────────────────────────────────────────────────────── */
+@keyframes typingBounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40%            { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ──────────────────────────────────────────────────────
+   Responsive
+────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .container {
+        max-width: 100%;
+        padding-bottom: 20px;
+    }
+
+    .main-content.siri-layout {
+        padding: 0 16px 20px;
+    }
+
+    .active-chunk-text {
+        font-size: 1.1rem;
+    }
+
+    .iridescent-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    .chat-message-bubble {
+        max-width: 88%;
+    }
+
+    .user-bubble,
+    .final-user {
+        max-width: 80%;
+    }
+
+    .transcript-section {
+        max-height: 55vh;
+    }
+}
+
+/* Legacy hidden elements */
+.chat-section {
+    display: none;
+}

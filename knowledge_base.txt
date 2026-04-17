@@ -1,0 +1,184 @@
+==== GDPR KNOWLEDGE BASE ====
+GDPR Voice Assistant — Knowledge Base
+Last updated: 2026
+This file is loaded at startup and used for Retrieval-Augmented Generation (RAG).
+Add, edit, or replace any sections to match your specific deployment needs.
+============================
+
+== SECTION 1: GDPR OVERVIEW ==
+
+The General Data Protection Regulation (GDPR) is a comprehensive privacy and data protection law enacted by the European Union (EU) that came into force on 25 May 2018. It replaced the 1995 Data Protection Directive and applies to all organizations — regardless of where they are based — that process personal data of individuals in the European Economic Area (EEA).
+
+The GDPR is built on seven core principles: lawfulness, fairness and transparency; purpose limitation; data minimisation; accuracy; storage limitation; integrity and confidentiality (security); and accountability.
+
+GDPR applies to any business or public body that collects, stores, uses, or shares personal data of EU/EEA residents. This includes companies physically located outside the EU if they offer goods or services to, or monitor the behavior of, EU/EEA residents (Article 3 — Territorial Scope).
+
+== SECTION 2: PERSONAL DATA DEFINITIONS ==
+
+Personal data is any information that relates to an identified or identifiable natural person — the "data subject." This includes obvious data like names, email addresses, phone numbers, and ID numbers, but also less obvious identifiers such as IP addresses, cookie IDs, location data, and physiological or genetic data.
+
+Special categories of personal data (also called sensitive data) receive the highest level of protection under GDPR. These include: racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, genetic data, biometric data (when used to uniquely identify a person), health data, data about sex life or sexual orientation.
+
+Processing of special category data is prohibited unless one of the specific conditions under Article 9(2) applies — for example, explicit consent, vital interests, or public health.
+
+Pseudonymous data (data where a key is needed to identify the individual) is still personal data and falls under GDPR. Truly anonymous data, where re-identification is not possible, falls outside GDPR scope.
+
+== SECTION 3: LAWFUL BASES FOR PROCESSING ==
+
+Under Article 6, every processing activity must have at least one lawful basis. The six lawful bases are:
+
+1. Consent — The data subject has freely given, specific, informed, and unambiguous consent. Consent must be as easy to withdraw as to give.
+2. Contract — Processing is necessary to perform a contract with the data subject, or to take pre-contractual steps at their request.
+3. Legal Obligation — Processing is necessary to comply with a legal obligation (e.g., tax records, employment law).
+4. Vital Interests — Processing is necessary to protect someone's life.
+5. Public Task — Processing is necessary for a task in the public interest or official authority.
+6. Legitimate Interests — Processing is necessary for the legitimate interests of the controller or a third party, provided these interests are not overridden by the data subject's rights.
+
+Legitimate Interests (Article 6(1)(f)) requires a three-part balancing test: purpose test (is there a legitimate interest?), necessity test (is processing necessary?), and balancing test (do the individual's interests override it?).
+
+== SECTION 4: DATA SUBJECT RIGHTS ==
+
+GDPR grants data subjects eight key rights:
+
+1. Right to be informed (Articles 13–14): Organizations must provide clear, transparent information about how they use personal data, typically through a privacy notice.
+
+2. Right of access (Article 15): Data subjects can request a copy of their personal data and supplementary information about how it is processed. This is often fulfilled via a Subject Access Request (SAR). Organizations have one month to respond.
+
+3. Right to rectification (Article 16): Data subjects can request correction of inaccurate personal data or completion of incomplete data.
+
+4. Right to erasure / Right to be Forgotten (Article 17): Data subjects can request deletion of their personal data where there is no compelling reason for its continued processing. Grounds include: the data is no longer necessary, consent is withdrawn, there is no legitimate overriding interest, or the data was unlawfully processed.
+
+5. Right to restrict processing (Article 18): Data subjects can request that processing be restricted (paused) while a dispute is being resolved.
+
+6. Right to data portability (Article 20): Data subjects can request their personal data in a structured, commonly used, machine-readable format, and have it transferred to another controller. This applies only to data processed on the basis of consent or contract, and processed by automated means.
+
+7. Right to object (Article 21): Data subjects can object to processing based on legitimate interests or for direct marketing purposes. Objection to direct marketing must always be honored.
+
+8. Rights related to automated decision-making and profiling (Article 22): Data subjects have the right not to be subject to a decision based solely on automated processing (including profiling) that significantly affects them, unless an exception applies.
+
+== SECTION 5: DATA CONTROLLER AND PROCESSOR ==
+
+A Data Controller is the natural or legal person who determines the purposes and means of processing personal data. Controllers have the primary obligation to comply with GDPR.
+
+A Data Processor is a person or organization that processes data on behalf of a controller. Processors must follow controller instructions and have obligations around security, sub-processing, and assisting the controller with GDPR compliance.
+
+Controllers must have a Data Processing Agreement (DPA) in place with all processors (Article 28). The DPA must specify the nature, purpose, and duration of processing, the types of personal data and categories of data subjects, and the obligations and rights of the controller.
+
+Joint Controllers (Article 26): Two or more controllers who jointly determine the purposes and means of processing. They must have a transparent arrangement defining their respective responsibilities — especially regarding data subject rights.
+
+== SECTION 6: DATA PROTECTION OFFICER (DPO) ==
+
+A Data Protection Officer (DPO) must be appointed by public authorities/bodies (other than courts), and by organizations that carry out large-scale systematic monitoring of individuals or large-scale processing of special category data.
+
+The DPO must have expert knowledge of data protection law. They can be an employee or external consultant. The DPO must be involved in all issues relating to the protection of personal data, act independently, and report to the highest management level.
+
+The DPO's tasks include: informing and advising on GDPR obligations, monitoring compliance, advising on Data Protection Impact Assessments (DPIAs), cooperating with the supervisory authority, and acting as a contact point for data subjects.
+
+== SECTION 7: DATA BREACH NOTIFICATION ==
+
+Under Article 33, a personal data breach must be reported to the relevant supervisory authority within 72 hours of becoming aware of it, where feasible, unless the breach is unlikely to result in a risk to individuals' rights and freedoms.
+
+If the breach is likely to result in a high risk to individuals, the data subjects must also be notified without undue delay (Article 34). Notification to data subjects is not required if: the data was encrypted, the controller has taken measures that ensure the high risk is no longer likely to materialize, or individual notification would involve disproportionate effort (public communication may be used instead).
+
+The breach notification to supervisory authorities must include: a description of the breach, the categories and approximate number of data subjects and records affected, the name and contact of the DPO or other contact, a description of likely consequences, and measures taken or proposed to address the breach.
+
+== SECTION 8: DATA PROTECTION IMPACT ASSESSMENT (DPIA) ==
+
+A DPIA (Article 35) is required when a type of processing is likely to result in a high risk to the rights and freedoms of natural persons. A DPIA must be carried out before the processing begins.
+
+Processing that requires a DPIA includes: systematic and extensive profiling with significant effects; processing of special category data on a large scale; systematic monitoring of a publicly accessible area on a large scale.
+
+A DPIA must include: a description of the processing operations and their purposes, the necessity and proportionality of the processing, the risks to data subjects, and the measures to address those risks.
+
+If the DPIA indicates a high residual risk that cannot be mitigated, the supervisory authority must be consulted before processing begins (Article 36 — Prior Consultation).
+
+== SECTION 9: INTERNATIONAL DATA TRANSFERS ==
+
+Transferring personal data outside the EEA is restricted under GDPR (Chapter V). Transfers can only take place if an adequate level of protection is ensured.
+
+Mechanisms for lawful international transfers:
+
+1. Adequacy Decision (Article 45): The EU Commission has determined that a country offers an adequate level of data protection (e.g., UK, Switzerland, Japan, South Korea, Canada (commercial), Israel, New Zealand, Argentina).
+
+2. Standard Contractual Clauses (SCCs) (Article 46): EU Commission-approved contract clauses between the exporter and importer. New SCCs were adopted in June 2021.
+
+3. Binding Corporate Rules (BCRs) (Article 47): Approved internal rules for multinational companies transferring data within their corporate group.
+
+4. Derogations (Article 49): Used only in specific situations — explicit consent, performance of a contract, public interest, legal claims, or vital interests.
+
+The Schrems II ruling (July 2020) invalidated the EU-US Privacy Shield. Organizations must now conduct a Transfer Impact Assessment (TIA) when using SCCs to transfer data to countries without adequacy decisions.
+
+The EU-US Data Privacy Framework was adopted in July 2023 and provides a new adequacy mechanism for transfers to certified US organizations.
+
+== SECTION 10: CONSENT REQUIREMENTS ==
+
+Valid consent under GDPR (Article 7) must be: freely given, specific, informed, and unambiguous. It must involve a clear affirmative action (e.g., actively ticking a box — pre-ticked boxes are not valid).
+
+Consent must be granular — separate consent must be sought for different purposes. Bundling consent with terms and conditions is not valid under GDPR.
+
+For special categories of data, explicit consent is required, meaning a clear, affirmative statement specifically agreeing to the processing.
+
+Children's consent: In most EU member states, children under 16 require parental consent for online services. Member states can lower this to age 13.
+
+Organizations must keep evidence of consent — who consented, when, what they were told, and how consent was given.
+
+== SECTION 11: PRIVACY BY DESIGN AND BY DEFAULT ==
+
+Article 25 requires data protection to be embedded into products, services, and business processes from the beginning — Privacy by Design — rather than being added on later.
+
+Privacy by Default means that by default, only personal data that is necessary for each specific purpose is processed. This applies to: the amount of data collected, the extent of processing, the period of storage, and the accessibility.
+
+Technical and Organisational Measures (TOMs): Controllers must implement appropriate measures (encryption, pseudonymisation, access controls, audit logs) to demonstrate GDPR compliance.
+
+== SECTION 12: ACCOUNTABILITY AND DOCUMENTATION ==
+
+Article 5(2) establishes the accountability principle — controllers must not only comply with GDPR but be able to demonstrate compliance.
+
+Records of Processing Activities (RoPA) (Article 30): Controllers and processors with 250+ employees must maintain a written record of processing activities. Smaller organizations must keep records unless processing is likely to result in a risk to individuals. RoPA must include: name and contact details of the controller/DPO, purposes of processing, categories of data subjects and personal data, recipients of data, transfers to third countries, retention periods, and security measures.
+
+Privacy Notices must be clear, concise, transparent, and provide all the information listed in Articles 13 and 14, including legal basis, retention periods, and data subject rights.
+
+== SECTION 13: FINES AND ENFORCEMENT ==
+
+GDPR provides for two tiers of administrative fines:
+
+Tier 1 — Up to €10 million or 2% of total worldwide annual turnover (whichever is higher), for violations such as: failure to implement Privacy by Design, failure to appoint a DPO, failure to notify breaches, or violations by processors.
+
+Tier 2 — Up to €20 million or 4% of total worldwide annual turnover (whichever is higher), for the most serious violations such as: violating basic principles (lawfulness, fairness, transparency), violating data subject rights, or unlawful international transfers.
+
+National supervisory authorities (Data Protection Authorities / DPAs) are responsible for enforcement within their jurisdictions. Each EU member state has its own DPA. In Greece, this is the Hellenic Data Protection Authority (HDPA / Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα – ΑΠΔΠΧ).
+
+Notable GDPR fines: Meta (Ireland) — €1.2 billion (2023, international transfers); Amazon (Luxembourg) — €746 million (2021); Google (France) — €150 million (2022); WhatsApp (Ireland) — €225 million (2021).
+
+== SECTION 14: GDPR IN GREECE — HELLENIC CONTEXT ==
+
+Greece implemented GDPR through Law 4624/2019, which supplements and clarifies the application of GDPR in Greece. The Hellenic Data Protection Authority (ΑΠΔΠΧ — Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα) is the supervisory authority in Greece.
+
+Key Greek-specific provisions under Law 4624/2019:
+- Age of consent for children's data is set at 15 years in Greece.
+- Special provisions for processing in employment contexts (Article 22 of Law 4624/2019).
+- Criminal penalties may also apply in Greece for serious GDPR violations.
+
+The ΑΠΔΠΧ can issue fines, order cessation of processing, and make public announcements about violations. Citizens can file complaints with the ΑΠΔΠΧ at www.dpa.gr.
+
+== SECTION 15: KEY GDPR TERMINOLOGY ==
+
+- Data Subject: An identified or identifiable natural person whose data is processed.
+- Controller: Entity that determines why and how personal data is processed.
+- Processor: Entity that processes data on behalf of a controller.
+- Processing: Any operation on personal data (collection, storage, use, disclosure, deletion, etc.).
+- Pseudonymisation: Replacing directly identifying info with an alias, while retaining re-identification key separately.
+- Anonymisation: Irreversibly removing all identifying information so re-identification is not possible.
+- Profiling: Automated processing of personal data to evaluate personal aspects (e.g., performance, behavior, location).
+- Cross-border processing: Processing in more than one EU member state, or processing that affects data subjects in more than one EU member state.
+- Lead Supervisory Authority: The DPA of the EU member state where the controller's main establishment is located, responsible for cross-border processing (one-stop-shop mechanism).
+- Right to be Forgotten: Informal name for the right to erasure under Article 17.
+- SAR (Subject Access Request): A request by a data subject to access their personal data (Article 15).
+- DPA (Data Processing Agreement): A contract between controller and processor mandated by Article 28.
+- DPO (Data Protection Officer): A designated expert responsible for GDPR compliance oversight.
+- DPIA (Data Protection Impact Assessment): Pre-processing risk assessment for high-risk activities.
+- TIA (Transfer Impact Assessment): Assessment required when using SCCs for international transfers.
+- SCC (Standard Contractual Clauses): EU Commission-approved contract clauses for international transfers.
+- BCR (Binding Corporate Rules): Internal data transfer rules for multinational corporate groups.
+- RoPA (Records of Processing Activities): Mandatory documentation of all processing activ ities.
+- Supervisory Authority: National data protection regulator (in Greece: ΑΠΔΠΧ).

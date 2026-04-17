@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDPR Voice Assistant</title>
+    <meta name="description" content="GDPR Voice & Text Assistant — ask anything about GDPR compliance using voice or text.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='config.js') }}"></script>
+</head>
+
+<body>
+    <div class="app-atmosphere"></div>
+    <div class="container">
+        <div class="footer-controls">
+            <header class="glass-header">
+                <div id="statusText" class="status-pill">Ready</div>
+                <div id="closeBtn" class="floating-close-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+            </header>
+        </div>
+
+        <div class="main-content siri-layout">
+
+            <!-- Mode Toggle + Language Selector -->
+            <div class="mode-toggle-wrapper">
+                <div class="mode-toggle" id="modeToggle" role="group" aria-label="Input mode">
+                    <button class="mode-btn active" id="modeAudioBtn" data-mode="audio" title="Voice input">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                        Audio
+                    </button>
+                    <button class="mode-btn" id="modeTextBtn" data-mode="text" title="Text input">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+                            <path d="M6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"/>
+                        </svg>
+                        Text
+                    </button>
+                </div>
+
+                <!-- Language selector: controls voice input language for Whisper ASR -->
+                <div class="lang-selector-wrapper" title="Voice input language">
+                    <svg class="lang-globe-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    <span class="lang-display-text" id="langDisplayText">Greek</span>
+                    <svg class="lang-chevron" viewBox="0 0 10 6" fill="currentColor" aria-hidden="true">
+                        <path d="M0 0l5 6 5-6z"/>
+                    </svg>
+                    <!-- Invisible overlay select covers the full wrapper area -->
+                    <select id="languageSelect" class="lang-select" aria-label="Voice input language">
+                        <option value="el">Greek</option>
+                        <option value="en">English</option>
+                        <option value="de">German</option>
+                        <option value="fr">French</option>
+                        <option value="es">Spanish</option>
+                        <option value="it">Italian</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="nl">Dutch</option>
+                        <option value="pl">Polish</option>
+                        <option value="ru">Russian</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese</option>
+                        <option value="ja">Japanese</option>
+                        <option value="tr">Turkish</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Transcript View -->
+            <div class="transcript-section">
+                <div id="activeChunkDisplay" class="active-chunk-text">
+                    <span class="muted-text">Agent</span><br><strong>Ready to help.</strong>
+                </div>
+                <div id="userTranscript" class="chat-history-container" style="display: none;">
+                </div>
+            </div>
+
+            <!-- Voice Interaction Section -->
+            <div class="voice-section" id="voiceSection">
+                <div class="iridescent-container">
+                    <div id="voiceVisualizer" class="voice-visualizer">
+                        <div id="waveContainer" class="wave-container"></div>
+                    </div>
+                    <button id="voiceBtn" class="voice-agent-trigger" title="Voice Interaction" disabled>
+                        <div class="orb-iridescent"></div>
+                        <div class="orb-rings">
+                            <span class="ring-1"></span>
+                            <span class="ring-2"></span>
+                            <span class="ring-3"></span>
+                        </div>
+                        <div class="mic-overlay">
+                            <svg class="mic-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                                <path
+                                    d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="particle-glow"></div>
+                </div>
+            </div>
+
+            <!-- Text Input Section -->
+            <div class="text-section" id="textSection" style="display: none;">
+                <div class="text-input-area">
+                    <div id="textInputContainer" class="siri-input-container">
+                        <input type="text" id="textInput" placeholder="Type your message here..." autocomplete="off" />
+                        <button id="sendBtn" class="send-btn" title="Send message" aria-label="Send">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages (legacy, hidden) -->
+            <div id="chatSection" class="chat-section" style="display:none;">
+                <div id="chatMessages" class="chat-messages"></div>
+                <div class="chat-controls">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
